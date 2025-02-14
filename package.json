@@ -1,0 +1,28 @@
+{
+  "name": "duplicate-detector",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "dup-detector": "./bin/index.js"
+  },
+  "scripts": {
+    "start": "node ./bin/index.js",
+    "test": "jest"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.26.4",
+    "@babel/core": "^7.26.8",
+    "@babel/parser": "^7.26.8",
+    "@babel/preset-env": "^7.26.8",
+    "@babel/traverse": "^7.26.8",
+    "chalk": "^5.4.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
