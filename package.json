@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "dup-detector": "./bin/index.js"
+    "dup-checker": "./bin/index.js"
   },
   "scripts": {
     "start": "node ./bin/index.js",
+    "dup-checker": "node ./bin/index.js",
     "test": "jest"
   },
   "type": "module",
