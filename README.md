@@ -15,4 +15,4 @@ You can install **dup-checker** globally or as a dev dependency.
 
 ### Install globally:
 ```bash
-npm install -g varfunc-dupes
+npm install -g dup-checker
