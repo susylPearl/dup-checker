@@ -11,7 +11,7 @@ A simple Node.js library to find and fix duplicate variables and functions in Ja
 
 ## Installation
 
-You can install **varfunc-dupes** globally or as a dev dependency.
+You can install **dup-checker** globally or as a dev dependency.
 
 ### Install globally:
 ```bash
