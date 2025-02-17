@@ -1,6 +1,6 @@
 {
   "name": "dup-checker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -10,6 +10,10 @@
     "start": "node ./bin/index.js",
     "dup-checker": "node ./bin/index.js",
     "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/susylPearl/dup-checker"
   },
   "type": "module",
   "keywords": [],

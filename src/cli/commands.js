@@ -1,19 +1,23 @@
 import { findDuplicates } from "../core/detector.js";
-import { logInfo, logWarning } from "../utils/logger.js";
+import { logError, logSuccess } from "../utils/logger.js";
 
 const run = () => {
-  const directory = process.argv[2] || ".";
-  debugger;
-  logInfo(`Scanning directory: ${directory}`);
+  // Get the input path from CLI argument
+  const inputPath = process.argv[2];
+  if (!inputPath) {
+    logError("Please provide a path to scan.");
+    process.exit(1);
+  }
 
-  const duplicates = findDuplicates(directory);
+  // Get the duplicate variables/functions on scanned path
+  const duplicates = findDuplicates(inputPath);
   if (duplicates.length > 0) {
-    logWarning("Duplicates found:");
+    logError(`Duplicates variables/functions found in ${inputPath}`);
     duplicates.forEach((d) => {
-      console.log(`${d.name} in ${d.file}`);
+      logError(`- ${d.name} in ${d.file}`);
     });
   } else {
-    logInfo("No duplicates found.");
+    logSuccess(`No duplicates variables/functions found in ${inputPath}`);
   }
 };
 

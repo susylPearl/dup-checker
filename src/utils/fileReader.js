@@ -1,22 +1,39 @@
-// const fs = require("fs");
-// const path = require("path");
-// const { SUPPORTED_EXTENSIONS, IGNORE_DIRS } = require("../config/settings");
-import fs from 'fs';
-import path from 'path';
-import { SUPPORTED_EXTENSIONS, IGNORE_DIRS } from '../config/settings.js';
+import fs from "fs";
+import path from "path";
+import { IGNORE_DIRS, SUPPORTED_EXTENSIONS } from "../config/settings.js";
 
-const readFiles = (dir) => {
+const scanPath = (inputPath) => {
+  const absolutePath = path.resolve(inputPath);
   let files = [];
-  fs.readdirSync(dir).forEach((file) => {
-    const fullPath = path.join(dir, file);
-    if (IGNORE_DIRS.includes(file)) return;
+
+  // Check if the path is a file
+  if (fs.statSync(absolutePath).isFile()) {
+    if (isSupportedFile(absolutePath)) {
+      files.push(absolutePath);
+    } else {
+      console.log(chalk.yellow(`Skipping unsupported file: ${absolutePath}`));
+    }
+    return files;
+  }
+
+  // If it's a directory, scan recursively
+  fs.readdirSync(absolutePath).forEach((file) => {
+    const fullPath = path.join(absolutePath, file);
+
     if (fs.statSync(fullPath).isDirectory()) {
-      files = files.concat(readFiles(fullPath));
-    } else if (SUPPORTED_EXTENSIONS.some((ext) => file.endsWith(ext))) {
+      if (!IGNORE_DIRS.includes(file)) {
+        files = files.concat(scanPath(fullPath)); // Recursive call for directories
+      }
+    } else if (isSupportedFile(fullPath)) {
       files.push(fullPath);
     }
   });
+
   return files;
 };
 
-export { readFiles };
+const isSupportedFile = (file) => {
+  return SUPPORTED_EXTENSIONS.includes(path.extname(file));
+};
+
+export { scanPath };
