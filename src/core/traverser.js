@@ -10,7 +10,7 @@ const extractIdentifiers = (ast) => {
       if (path.node.id.type === "ArrayPattern") {
         path.node.id.elements.forEach((element) => {
           if (element && element.type === "Identifier") {
-            identifiers.push(element.name);
+            identifiers.push({ variable: element.name });
           } else {
             console.log(
               "Unhandled element type in ArrayPattern:",
@@ -19,11 +19,11 @@ const extractIdentifiers = (ast) => {
           }
         });
       } else if (path.node.id.type === "Identifier") {
-        identifiers.push(path.node.id.name);
+        identifiers.push({ variable: path.node.id.name });
       }
     },
     FunctionDeclaration(path) {
-      identifiers.push(path.node.id.name);
+      identifiers.push({ function: path.node.id.name });
     },
   });
 
